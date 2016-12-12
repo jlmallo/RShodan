@@ -1,0 +1,50 @@
+# descarga e instalacion de librerias
+install.packages("XML")
+install.packages("leaflet")
+install.packages("maps")
+
+# Instalar devtools:
+devtools::install_github("hrbrmstr/ipapi")
+devtools::install_github("hrbrmstr/shodan")
+
+library("shodan")
+library("XML")
+library("leaflet")
+library("maps")
+library(httr)
+library(jsonlite)
+
+# Variables
+shodan_base_url  <- "https://api.shodan.io"
+shodan_api_key <- "D32FBKHYYqETSf4bIdmurM7xoZA74FnL"
+
+# Funciones
+
+DescargarFicheros <- function() {
+  xmlUrl1 <- "https://static.nvd.nist.gov/feeds/xml/cpe/dictionary/official-cpe-dictionary_v2.3.xml"
+  download.file(xmlUrl1, destfile = "./CPE_dictionary.xml", method = "wget")
+  xmlUrl2 <- "https://static.nvd.nist.gov/feeds/xml/cve/nvdcve-2.0-Modified.xml.zip"
+  download.file(xmlUrl2, destfile = "./nvdcve-2.0-modified.zip", method = "wget")
+  untar("nvdcve-2.0-modified.zip")
+}
+
+
+ObtenerWebcams <- function(query=NULL, facets=NULL, page=1, minify=TRUE){
+  facets <- paste(facets, collapse=",")
+  res <- GET(shodan_base_url,path="shodan/host/search",query=list(query=query,
+                                                                  facets=facets,
+                                                                  page=page,
+                                                                  minify=minify,
+                                                                  key=shodan_api_key))
+
+  result <- stop_for_status(res)
+  result
+  fromJSON(content(res, as="text"))
+
+
+}
+
+ObtenerWebcams("SQ-WEBCAM")
+
+
+
