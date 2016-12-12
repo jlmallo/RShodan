@@ -5,9 +5,9 @@ install.packages("maps")
 
 # Instalar devtools:
 devtools::install_github("hrbrmstr/ipapi")
-devtools::install_github("hrbrmstr/shodan")
+#devtools::install_github("hrbrmstr/shodan")
 
-library("shodan")
+#library("shodan")
 library("XML")
 library("leaflet")
 library("maps")
