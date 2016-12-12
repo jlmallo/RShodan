@@ -22,12 +22,13 @@ shodan_api_key <- "D32FBKHYYqETSf4bIdmurM7xoZA74FnL"
 
 DescargarFicheros <- function() {
   xmlUrl1 <- "https://static.nvd.nist.gov/feeds/xml/cpe/dictionary/official-cpe-dictionary_v2.3.xml"
-  download.file(xmlUrl1, destfile = "./CPE_dictionary.xml", method = "wget")
+  download.file(xmlUrl1, destfile = "./data/CPE_dictionary.xml", method = "wget")
   xmlUrl2 <- "https://static.nvd.nist.gov/feeds/xml/cve/nvdcve-2.0-Modified.xml.zip"
-  download.file(xmlUrl2, destfile = "./nvdcve-2.0-modified.zip", method = "wget")
-  untar("nvdcve-2.0-modified.zip")
+  download.file(xmlUrl2, destfile = "./data/nvdcve-2.0-modified.zip", method = "wget")
+  untar("./XML/nvdcve-2.0-modified.zip", exdir = "./data")
 }
 
+?untar
 
 ObtenerWebcams <- function(query=NULL, facets=NULL, page=1, minify=TRUE){
   facets <- paste(facets, collapse=",")
