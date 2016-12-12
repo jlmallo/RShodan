@@ -11,8 +11,8 @@ library("shodan")
 library("XML")
 library("leaflet")
 library("maps")
-library(httr)
-library(jsonlite)
+library("httr")
+library("jsonlite")
 
 # Variables
 shodan_base_url  <- "https://api.shodan.io"
