@@ -28,24 +28,19 @@ DescargarFicheros <- function() {
   untar("./XML/nvdcve-2.0-modified.zip", exdir = "./data")
 }
 
-?untar
-
 ObtenerWebcams <- function(query=NULL, facets=NULL, page=1, minify=TRUE){
-  facets <- paste(facets, collapse=",")
-  res <- GET(shodan_base_url,path="shodan/host/search",query=list(query=query,
-                                                                  facets=facets,
-                                                                  page=page,
-                                                                  minify=minify,
-                                                                  key=shodan_api_key))
+  facets <- paste(facets, collapse = ",")
+  res <- GET(shodan_base_url,path = "shodan/host/search",query = list(query = query,
+                                                                  facets = facets,
+                                                                  page = page,
+                                                                  minify = minify,
+                                                                  key = shodan_api_key))
 
   result <- stop_for_status(res)
   result
-  fromJSON(content(res, as="text"))
+  fromJSON(content(res, as = "text"))
 
 
 }
 
 ObtenerWebcams("SQ-WEBCAM")
-
-
-
