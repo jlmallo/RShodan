@@ -59,7 +59,7 @@ ConsultarShodan <- function(query=NULL, facets=NULL, page=1, minify=TRUE){
 
   #magrittr
   #convert this to a data.frame
-  reposdf <- repos %>% ToDataFrameTable(CPE = "hostnames",
+  reposdf <- repos %>% ToDataFrameTable(CPE = "cpe",
                                         TITLE="title",
                                         IP="ip_str",
                                         TRASNPORT="transport",
