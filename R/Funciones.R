@@ -1,10 +1,10 @@
 # descarga e instalacion de librerias
-install.packages("XML")
-install.packages("leaflet")
-install.packages("maps")
+#install.packages("XML")
+#install.packages("leaflet")
+#install.packages("maps")
 
 # Instalar devtools:
-devtools::install_github("hrbrmstr/ipapi")
+#devtools::install_github("hrbrmstr/ipapi")
 #devtools::install_github("hrbrmstr/shodan")
 
 #library("shodan")
@@ -13,6 +13,7 @@ library("leaflet")
 library("maps")
 library("httr")
 library("jsonlite")
+library(httr)
 
 # Variables
 shodan_base_url  <- "https://api.shodan.io"
@@ -28,7 +29,8 @@ DescargarFicheros <- function() {
   untar("./XML/nvdcve-2.0-modified.zip", exdir = "./data")
 }
 
-ObtenerWebcams <- function(query=NULL, facets=NULL, page=1, minify=TRUE){
+ConsultarShodan <- function(query=NULL, facets=NULL, page=1, minify=TRUE){
+
   facets <- paste(facets, collapse = ",")
   res <- GET(shodan_base_url,path = "shodan/host/search",query = list(query = query,
                                                                   facets = facets,
@@ -36,11 +38,13 @@ ObtenerWebcams <- function(query=NULL, facets=NULL, page=1, minify=TRUE){
                                                                   minify = minify,
                                                                   key = shodan_api_key))
 
-  result <- stop_for_status(res)
-  result
-  fromJSON(content(res, as = "text"))
+  stop_for_status(res)
 
+  file <- fromJSON(content(res, as = "text"))
+
+  print(nrow(file$matches))
+
+  print(file$matches$ip)
 
 }
 
-ObtenerWebcams("SQ-WEBCAM")
