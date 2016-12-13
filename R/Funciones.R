@@ -31,6 +31,7 @@ DescargarFicheros <- function() {
 
 ConsultarShodan <- function(query=NULL, facets=NULL, page=1, minify=TRUE){
 
+
   facets <- paste(facets, collapse = ",")
   res <- GET(shodan_base_url,path = "shodan/host/search",query = list(query = query,
                                                                   facets = facets,
