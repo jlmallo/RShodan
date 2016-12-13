@@ -40,6 +40,9 @@ ConsultarShodan <- function(query=NULL, facets=NULL, page=1, minify=TRUE){
                                                                   key = shodan_api_key))
 
   stop_for_status(res)
+  warn_for_status(res, task = NULL)
+
+  message_for_status(res, task = NULL)
 
   file <- fromJSON(content(res, as = "text"))
 
