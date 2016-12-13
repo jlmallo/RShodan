@@ -8,7 +8,7 @@ library(devtools)
 # Instalar devtools:
 devtools::install_github("hrbrmstr/ipapi")
 #devtools::install_github("hrbrmstr/shodan")
-devtools::install_github("gluc/data.tree")
+devtools::install_github("gluc/data.tree", method = "curl", force=T)
 
 #library("shodan")
 library("XML")
