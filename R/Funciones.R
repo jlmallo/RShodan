@@ -71,5 +71,7 @@ ConsultarShodan <- function(query=NULL, facets=NULL, page=1, minify=TRUE){
                                         LONGITUDE="longitude",
                                         LATITUDE="latitude")
 
-  reposdf
+  y <- reposdf[!duplicated(reposdf[,3]),]
+
+  y
 }
