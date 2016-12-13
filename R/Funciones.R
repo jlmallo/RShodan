@@ -44,7 +44,11 @@ ConsultarShodan <- function(query=NULL, facets=NULL, page=1, minify=TRUE){
 
   print(nrow(file$matches))
 
+  print(file$matches$hostnames)
   print(file$matches$ip)
 
+  print(length(file$matches$ip))
+  print(length(file$matches$hostnames))
+  df <- do.call(rbind,lapply(cbind, file$matches$ip, file$matches$hostnames))
 }
 
