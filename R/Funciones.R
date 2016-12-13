@@ -72,4 +72,3 @@ ConsultarShodan <- function(query=NULL, facets=NULL, page=1, minify=TRUE){
 
   reposdf
 }
-
