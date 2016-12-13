@@ -2,6 +2,7 @@
 install.packages("XML")
 install.packages("leaflet")
 install.packages("maps")
+#install.packages("tidyr")
 
 library(devtools)
 # Instalar devtools:
