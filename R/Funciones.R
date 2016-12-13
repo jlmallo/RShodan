@@ -59,9 +59,10 @@ ConsultarShodan <- function(query=NULL, facets=NULL, page=1, minify=TRUE){
 
   #magrittr
   #convert this to a data.frame
-  reposdf <- repos %>% ToDataFrameTable(CPE = "cpe",
-                                        TITLE="title",
+  reposdf <- repos %>% ToDataFrameTable(
                                         IP="ip_str",
+                                        CPE = "cpe",
+                                        TITLE="title",
                                         TRASNPORT="transport",
                                         PORT="port",
                                         ORG="org",
@@ -71,7 +72,8 @@ ConsultarShodan <- function(query=NULL, facets=NULL, page=1, minify=TRUE){
                                         LONGITUDE="longitude",
                                         LATITUDE="latitude")
 
-  y <- reposdf[!duplicated(reposdf[,3]),]
+  #elimina duplicados por la columna del IP
+  uniques <- reposdf[!duplicated(reposdf[,1]),]
 
-  y
+  uniques
 }
