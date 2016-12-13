@@ -1,10 +1,11 @@
 # descarga e instalacion de librerias
-#install.packages("XML")
-#install.packages("leaflet")
-#install.packages("maps")
+install.packages("XML")
+install.packages("leaflet")
+install.packages("maps")
 
+library(devtools)
 # Instalar devtools:
-#devtools::install_github("hrbrmstr/ipapi")
+devtools::install_github("hrbrmstr/ipapi")
 #devtools::install_github("hrbrmstr/shodan")
 devtools::install_github("gluc/data.tree")
 
@@ -15,7 +16,7 @@ library("maps")
 library("httr")
 library("jsonlite")
 library(httr)
-library(data.tree)
+library("data.tree")
 library(magrittr)
 
 # Variables
