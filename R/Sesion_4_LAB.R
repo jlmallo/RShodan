@@ -100,3 +100,42 @@ par(mfrow = c(1, 3), mar = c(4, 4, 2, 1), oma = c(0, 0, 2, 0)) with(airquality, 
   plot(Wind, Ozone, main = "Ozone and Wind")
   plot(Solar.R, Ozone, main = "Ozone and Solar Radiation") plot(Temp, Ozone, main = "Ozone and Temperature") mtext("Ozone and Weather in New York City", outer = TRUE)
 })
+
+#Clústering jerárquico
+set.seed(1234)
+x <- rnorm(12, mean = rep(1:3, each = 4), sd = 0.2)
+y <- rnorm(12, mean = rep(c(1,2,1), each = 4), sd = 0.2)
+plot(x,y,col="blue",pch=19,cex=2)
+text(x+0.05, y+0.05, labels = as.character(1:12))
+
+df <- data.frame(x=x,y=y)
+distxy <- dist(df)
+cluster <- hclust(distxy)
+plot(cluster)
+
+#Clústering k-means
+set.seed(1234)
+x <- rnorm(12, mean = rep(1:3, each = 4), sd = 0.2)
+y <- rnorm(12, mean = rep(c(1,2,1), each = 4), sd = 0.2)
+plot(x,y,col="blue",pch=19,cex=2)
+text(x+0.05, y+0.05, labels = as.character(1:12))
+
+
+
+set.seed(1234)
+x <- rnorm(12, mean = rep(1:3, each = 4), sd = 0.2)
+y <- rnorm(12, mean = rep(c(1,2,1), each = 4), sd = 0.2)
+df <- data.frame(x,y)
+kmeansObj <- kmeans(df, centers = 3)
+
+## Pertenencia a cada cluster
+kmeansObj$cluster
+
+## Posición de los centroides
+kmeansObj$centers
+
+
+## Representación gráfica del clustering
+par(mar = rep(0.2, 4))
+plot(x,y,col=kmeansObj$cluster, pch=19, cex=2)
+points(kmeansObj$centers, col = 1:3, pch=3, cex=3, lwd=3)
