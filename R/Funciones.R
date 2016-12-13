@@ -44,15 +44,13 @@ ConsultarShodan <- function(query=NULL, facets=NULL, page=1, minify=TRUE){
 
   message_for_status(res, task = NULL)
 
-  file <- fromJSON(content(res, as = "text"))
+  data <- fromJSON(content(res, as = "text"))
 
-  print(nrow(file$matches))
+  test4 <- list('IP'=data$matches$ip)
+  test5 <- list('IP'=data$matches$hostnames)
 
-  print(file$matches$hostnames)
-  print(file$matches$ip)
+  writers_df <- data.frame(test4, test5)
 
-  print(length(file$matches$ip))
-  print(length(file$matches$hostnames))
-  df <- do.call(rbind,lapply(cbind, file$matches$ip, file$matches$hostnames))
+  writers_df
 }
 
