@@ -6,6 +6,7 @@
 # Instalar devtools:
 #devtools::install_github("hrbrmstr/ipapi")
 #devtools::install_github("hrbrmstr/shodan")
+devtools::install_github("gluc/data.tree")
 
 #library("shodan")
 library("XML")
@@ -14,6 +15,8 @@ library("maps")
 library("httr")
 library("jsonlite")
 library(httr)
+library(data.tree)
+library(magrittr)
 
 # Variables
 shodan_base_url  <- "https://api.shodan.io"
@@ -44,13 +47,15 @@ ConsultarShodan <- function(query=NULL, facets=NULL, page=1, minify=TRUE){
 
   message_for_status(res, task = NULL)
 
-  data <- fromJSON(content(res, as = "text"))
+  data <- fromJSON(content(res, as = "text"), simplifyDataFrame = FALSE)
 
-  test4 <- list('IP'=data$matches$ip)
-  test5 <- list('IP'=data$matches$hostnames)
+  repos <- as.Node(data)
+  print(repos, "hostnames", "ip_str")
 
-  writers_df <- data.frame(test4, test5)
+  #convert this to a data.frame
+  reposdf <- repos %>% ToDataFrameTable(CPE = "hostnames",
+                                        IP="ip_str")
 
-  writers_df
+  reposdf
 }
 
