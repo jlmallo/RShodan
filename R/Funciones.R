@@ -54,7 +54,14 @@ ConsultarShodan <- function(query=NULL, facets=NULL, page=1, minify=TRUE){
 
   #convert this to a data.frame
   reposdf <- repos %>% ToDataFrameTable(CPE = "hostnames",
-                                        IP="ip_str")
+                                        IP="ip_str",
+                                        TRASNPORT="transport",
+                                        PORT="port",
+                                        COUNTRY="country_name",
+                                        CITY="city",
+                                        POSTAL_CODE="postal_code",
+                                        LONGITUDE="longitude",
+                                        LATITUDE="latitude")
 
   reposdf
 }
