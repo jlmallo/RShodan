@@ -20,6 +20,7 @@ library(httr)
 library("data.tree")
 library(magrittr)
 library(dplyr)
+library(plyr)
 
 # Variables
 
@@ -40,10 +41,27 @@ DescargarFicheros <- function() {
   unzip("./data/nvdcve-2.0-modified.zip", exdir = dataPath) #NO SIRVE!!!!
 }
 
+
+#Une los dataframes de Shodan y CVE
 UnirDatos <- function()
 {
-
+  joinedDF <- inner_join(shodan, nvd, by="CPE.product")
+  joinedDF
 }
+
+#Cuenta la cantidad de CVEs encontradas por cada CPE de los hosts de Shodan
+ContarTotalCVE_CPE <- function(joinedDF){
+  total <- count(joinedDF, "CPE.product")
+  total
+}
+
+ContarTotalCVEs <- function(nvdDF){
+  total <- count(total$CVE)
+  total
+}
+
+
+
 
 
 
