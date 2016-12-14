@@ -25,3 +25,4 @@ Imports:
     dplyr
     plyr
     devtools
+    roxygen2

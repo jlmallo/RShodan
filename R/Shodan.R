@@ -1,7 +1,7 @@
 #Shodan
-shodan_base_url   <- "https://api.shodan.io"
-shodan_api_key    <- "D32FBKHYYqETSf4bIdmurM7xoZA74FnL"
-search_base       <- "apache"  #consulta a shodan
+shodan_base_url <- "https://api.shodan.io"
+shodan_api_key <- "D32FBKHYYqETSf4bIdmurM7xoZA74FnL"
+search_base <- "apache"  #consulta a shodan
 
 ##
 #GeolocalizarShodan <- function() {
