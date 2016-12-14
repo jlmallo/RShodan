@@ -73,7 +73,7 @@ ContarTotalCVE_CPE <- function(joinedDF){
 
 #' La función (\emph{ContarTotalCVEs}) nos devuelve el total de vulnerabilidades
 #' unicas que encontramos después de sanear los datos
-#' @return Valor total de vulnerabilidades únicas
+#' @return Cantidad de vulnerabilidades únicas
 #' @example
 #' ContarTotalCVEs(<data_frame_devuelto_por_el_fichero_(\emph{nvdcve-2.0-modified.xml})>)
 
