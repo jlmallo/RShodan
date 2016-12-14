@@ -24,7 +24,7 @@ ParseNVD <- function() {
       }
     }
   }
-  df
+  return(df)
 }
 
 ParserShodan <- function(){
@@ -52,5 +52,5 @@ ParserShodan <- function(){
   #elimina duplicados por la columna del IP
   uniques <- reposdf[!duplicated(reposdf[,1]),]
 
-  uniques
+  return(uniques)
 }

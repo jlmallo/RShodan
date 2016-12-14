@@ -47,27 +47,27 @@ DescargarFicheros <- function() {
 UnirDatos <- function()
 {
   joinedDF <- dplyr::inner_join(shodanDF, cveDF, by="CPE.product")
-  joinedDF
+  return(joinedDF)
 }
 
 #Contar la cantidad de CVEs encontradas por cada CPE de los hosts de Shodan
 ContarTotalCVE_CPE <- function(joinedDF){
   total <- count(joinedDF, "CPE.product")
-  total
+  return(total)
 }
 
 #Contar total de vulnerabilidades unicas
 ContarTotalCVEs <- function(nvdDF){
   nvdDF <- nvdDF[!duplicated(nvdDF[,2]),]
   total <- dplyr::summarise(nvdDF,total_de_vulnerabilidades_unicas = n())
-  total
+  return(total)
 }
 
 
 #Contar la cantidad de CPEs por CVE
 ContarTotalCPE_CVE <- function(joinedDF){
   total <- count(joinedDF, "CVE")
-  total
+  return(total)
 }
 
 

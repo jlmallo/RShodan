@@ -29,6 +29,6 @@ ConsultarShodan <- function(query=search_base, facets=NULL, page=1, minify=TRUE)
 
   #jsonlite
   data <- fromJSON(content(res, as = "text"), simplifyDataFrame = FALSE)
-
+  return(data)
 }
 
