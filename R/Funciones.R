@@ -2,7 +2,7 @@
 install.packages("XML")
 install.packages("leaflet")
 install.packages("maps")
-#install.packages("tidyr")
+install.packages("tidyr")
 
 library(devtools)
 # Instalar devtools:
@@ -28,6 +28,7 @@ dataPath <-"./data"
 
 # Funciones
 
+
 DescargarFicheros <- function() {
 
   if(!dir.exists(dataPath))
@@ -49,17 +50,25 @@ UnirDatos <- function()
   joinedDF
 }
 
-#Cuenta la cantidad de CVEs encontradas por cada CPE de los hosts de Shodan
+#Contar la cantidad de CVEs encontradas por cada CPE de los hosts de Shodan
 ContarTotalCVE_CPE <- function(joinedDF){
   total <- count(joinedDF, "CPE.product")
   total
 }
 
+#Contar total de vulnerabilidades unicas
 ContarTotalCVEs <- function(nvdDF){
-  total <- count(total$CVE)
+  nvdDF <- nvdDF[!duplicated(nvdDF[,2]),]
+  total <- dplyr::summarise(nvdDF,total_de_vulnerabilidades_unicas = n())
   total
 }
 
+
+#Contar la cantidad de CPEs por CVE
+ContarTotalCPE_CVE <- function(joinedDF){
+  total <- count(joinedDF, "CVE")
+  total
+}
 
 
 
