@@ -39,7 +39,7 @@ DescargarFicheros <- function() {
   xmlUrl2 <- "https://static.nvd.nist.gov/feeds/xml/cve/nvdcve-2.0-Modified.xml.zip"
   download.file(xmlUrl2, destfile = file.path(dataPath,"/nvdcve-2.0-modified.zip"), method = "wget")
 
-  unzip(file.path(dataPath,"/nvdcve-2.0-modified.zip"), exdir = file.path(dataPath)) #NO SIRVE!!!!
+  unzip(file.path(dataPath,"/nvdcve-2.0-modified.zip"), exdir = file.path(dataPath))
 }
 
 
