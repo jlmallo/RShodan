@@ -12,7 +12,7 @@ ParseNVD <- function() {
     if (lengthCPEs > 0) {
       for (j in 1:lengthCPEs) {
         cpe <- cveItem$`vulnerable-software-list`[j]
-        row <- c(CPEs = cpe, CVE = cveId, Description = cveDescription)
+        row <- c(CPE = cpe, CVE = cveId, Descripcion = cveDescription)
         if (i == 1 &  j == 1) {
           df <- rbind(data.frame(row))
           #colnames(df) <- c("CPE", "CVE", "Description")
@@ -27,7 +27,31 @@ ParseNVD <- function() {
   df
 }
 
-ParseCPE <- function()
-{
+ParserShodan <- function(){
 
+  #Invocamos consulta a shodan
+  data <- ConsultarShodan()
+
+  #data.tree
+  repos <- as.Node(data)
+
+  #magrittr
+  #convert this to a data.frame
+  reposdf <- repos %>% ToDataFrameTable(
+                                        IP="ip_str",
+                                        CPE.product = "cpe",
+                                        TITLE="title",
+                                        TRASNPORT="transport",
+                                        PORT="port",
+                                        ORG="org",
+                                        COUNTRY="country_name",
+                                        CITY="city",
+                                        POSTAL_CODE="postal_code",
+                                        LONGITUDE="longitude",
+                                        LATITUDE="latitude")
+
+  #elimina duplicados por la columna del IP
+  uniques <- reposdf[!duplicated(reposdf[,1]),]
+
+  uniques
 }
