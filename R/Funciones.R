@@ -25,8 +25,12 @@ library("plyr")
 
 dataPath <- file.path(getwd(),"data")
 
-# Funciones
-
+#' Descarga los ficheros necesarios para poder cruzar los datos con Shodan
+#' La función (\emph{DescargarFicheros}) verifica si la carpeta destino existe
+#' Si no existe la crea y si existe descarga el fichero y lo descomprime
+#' @return Carpeta con los ficheros necesarios
+#' @example
+#' DescargarFichero()
 
 DescargarFicheros <- function() {
 
@@ -43,34 +47,49 @@ DescargarFicheros <- function() {
 }
 
 
-#Une los dataframes de Shodan y CVE
+#' Une los dataframes que obtenemos de Shodan y CVE's decargados del NIST
+#' La función (\emph{UnirDatos}) ejecuta una (\strong{inner_join}) de los data
+#' frames creados mediante Shodan y el fichero XML
+#' @return Devuelve un dataframe con los datos unidos mediante una inner_join
+#' @example
+#' UnirDatos()
+
 UnirDatos <- function()
 {
   joinedDF <- dplyr::inner_join(shodanDF, cveDF, by = "CPE.product")
   return(joinedDF)
 }
 
-#Contar la cantidad de CVEs encontradas por cada CPE de los hosts de Shodan
+#' La función (\emph{ContarTotalCVE_CPE}) nos devuelve el total de CVE's que
+#' encontramos en cada host devuelto por Shodan
+#' @return Valor total de CVE per host
+#' @example
+#' ContarTotalCVE_CPE(<data_frame_devuelto_por_la_función_(\emph{UnirDatos})>)
+
 ContarTotalCVE_CPE <- function(joinedDF){
   total <- count(joinedDF, "CPE.product")
   return(total)
 }
 
-#Contar total de vulnerabilidades unicas
+#' La función (\emph{ContarTotalCVEs}) nos devuelve el total de vulnerabilidades
+#' unicas que encontramos después de sanear los datos
+#' @return Valor total de vulnerabilidades únicas
+#' @example
+#' ContarTotalCVEs(<data_frame_devuelto_por_el_fichero_(\emph{nvdcve-2.0-modified.xml})>)
+
 ContarTotalCVEs <- function(nvdDF){
   nvdDF <- nvdDF[!duplicated(nvdDF[,2]),]
   total <- dplyr::summarise(nvdDF,total_de_vulnerabilidades_unicas = n())
   return(total)
 }
 
+#' La función (\emph{ContarTotalCPE_CVE}) nos devuelve el total de CPE's por CVE's
+#' @return Cantidad de CPE's por CVE
+#' @example
+#' ContarTotalCPE_CVE(<data_frame_devuelto_por_la_función_(\emph{UnirDatos})>)
 
 #Contar la cantidad de CPEs por CVE
 ContarTotalCPE_CVE <- function(joinedDF){
   total <- count(joinedDF, "CVE")
   return(total)
 }
-
-
-
-
-
