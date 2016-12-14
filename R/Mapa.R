@@ -1,6 +1,8 @@
-
-
-#extraer ips webcams:
+#' La función (\emph{PintarMapa}) ubica en el mapa los datos de geolocalización
+#' devueltos por la consulta realizada con Shodan
+#' @return Plot ubicaciones sobre un mapa
+#' @example
+#' PintarMapa()
 
 PintarMapa <- function() {
 
@@ -12,5 +14,4 @@ PintarMapa <- function() {
   #preparar y pintar el mapa:
   world <- map("world", fill = TRUE, plot = FALSE)
   leaflet(data = world) %>% addTiles() %>% addCircleMarkers(locations$lon, locations$lat, color = '#003fff')
-
 }
