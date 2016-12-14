@@ -33,9 +33,8 @@ ParserShodan <- function(){
   data <- ConsultarShodan()
 
   #data.tree
-  repos <- as.Node(data)
+  repos <- data.tree::as.Node(data)
 
-  #magrittr
   #convert this to a data.frame
   reposdf <- repos %>% ToDataFrameTable(
                                         IP="ip_str",

@@ -1,8 +1,11 @@
+
+DescargarFicheros()
+
 # Carga de CVEs
 cveDF <- ParseNVD()
 
 # Carga de Shodan
-shodanSF <- ParserShodan()
+shodanDF <- ParserShodan()
 
 #Une los dataframes de Shodan y CVE
 joinedDF <- UnirDatos()

@@ -6,9 +6,8 @@ install.packages("tidyr")
 
 library(devtools)
 # Instalar devtools:
-devtools::install_github("hrbrmstr/ipapi")
-#devtools::install_github("hrbrmstr/shodan")
-devtools::install_github("gluc/data.tree", method = "curl", force=T)
+#devtools::install_github("hrbrmstr/ipapi")
+#devtools::install_github("gluc/data.tree", method = "curl", force=T)
 
 #library("shodan")
 library("XML")
@@ -39,6 +38,7 @@ DescargarFicheros <- function() {
 
   xmlUrl2 <- "https://static.nvd.nist.gov/feeds/xml/cve/nvdcve-2.0-Modified.xml.zip"
   download.file(xmlUrl2, destfile = dataPath+"/nvdcve-2.0-modified.zip", method = "wget")
+
   unzip("./data/nvdcve-2.0-modified.zip", exdir = dataPath) #NO SIRVE!!!!
 }
 
@@ -46,7 +46,7 @@ DescargarFicheros <- function() {
 #Une los dataframes de Shodan y CVE
 UnirDatos <- function()
 {
-  joinedDF <- inner_join(shodan, nvd, by="CPE.product")
+  joinedDF <- dplyr::inner_join(shodanDF, cveDF, by="CPE.product")
   joinedDF
 }
 
