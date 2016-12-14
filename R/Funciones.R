@@ -9,6 +9,8 @@ library(devtools)
 devtools::install_github("hrbrmstr/ipapi")
 #devtools::install_github("hrbrmstr/shodan")
 devtools::install_github("gluc/data.tree", method = "curl", force=T)
+devtools::install_github(repo = "r-net-tools/net.security")
+
 
 #library("shodan")
 library("XML")
@@ -19,19 +21,24 @@ library("jsonlite")
 library(httr)
 library("data.tree")
 library(magrittr)
+library("net.security")
 
 # Variables
 shodan_base_url  <- "https://api.shodan.io"
 shodan_api_key <- "D32FBKHYYqETSf4bIdmurM7xoZA74FnL"
+dataPath <-"./data"
 
 # Funciones
 
 DescargarFicheros <- function() {
+  if(!dir.exists(dataPath))
+    dir.create(dataPath, showWarnings = TRUE, recursive = FALSE, mode = "0777")
+
   xmlUrl1 <- "https://static.nvd.nist.gov/feeds/xml/cpe/dictionary/official-cpe-dictionary_v2.3.xml"
   download.file(xmlUrl1, destfile = "./data/CPE_dictionary.xml", method = "wget")
   xmlUrl2 <- "https://static.nvd.nist.gov/feeds/xml/cve/nvdcve-2.0-Modified.xml.zip"
-  download.file(xmlUrl2, destfile = "./data/nvdcve-2.0-modified.zip", method = "wget")
-  untar("./XML/nvdcve-2.0-modified.zip", exdir = "./data")
+  download.file(xmlUrl2, destfile = dataPath+"/nvdcve-2.0-modified.zip", method = "wget")
+  unzip("./data/nvdcve-2.0-modified.zip", exdir = dataPath) #NO SIRVE!!!!
 }
 
 ConsultarShodan <- function(query=NULL, facets=NULL, page=1, minify=TRUE){
