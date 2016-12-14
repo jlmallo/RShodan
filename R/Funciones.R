@@ -4,7 +4,7 @@ install.packages("leaflet")
 install.packages("maps")
 install.packages("tidyr")
 
-library(devtools)
+library("devtools")
 # Instalar devtools:
 #devtools::install_github("hrbrmstr/ipapi")
 #devtools::install_github("gluc/data.tree", method = "curl", force=T)
@@ -15,11 +15,11 @@ library("leaflet")
 library("maps")
 library("httr")
 library("jsonlite")
-library(httr)
+library("httr")
 library("data.tree")
-library(magrittr)
-library(dplyr)
-library(plyr)
+library("magrittr")
+library("dplyr")
+library("plyr")
 
 # Variables
 
@@ -30,7 +30,7 @@ dataPath <- file.path(getwd(),"data")
 
 DescargarFicheros <- function() {
 
-  if(!dir.exists(dataPath))
+  if (!dir.exists(dataPath))
     dir.create(dataPath, showWarnings = TRUE, recursive = FALSE, mode = "0777")
 
   xmlUrl2 <- "https://static.nvd.nist.gov/feeds/xml/cve/nvdcve-2.0-Modified.xml.zip"
@@ -43,7 +43,7 @@ DescargarFicheros <- function() {
 #Une los dataframes de Shodan y CVE
 UnirDatos <- function()
 {
-  joinedDF <- dplyr::inner_join(shodanDF, cveDF, by="CPE.product")
+  joinedDF <- dplyr::inner_join(shodanDF, cveDF, by = "CPE.product")
   return(joinedDF)
 }
 

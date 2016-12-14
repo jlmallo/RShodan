@@ -1,7 +1,7 @@
 #Shodan
-shodan_base_url   <- "https://api.shodan.io"
-shodan_api_key    <- "D32FBKHYYqETSf4bIdmurM7xoZA74FnL"
-search_base       <-"apache"  #consulta a shodan
+shodan_base_url <- "https://api.shodan.io"
+shodan_api_key <- "D32FBKHYYqETSf4bIdmurM7xoZA74FnL"
+search_base <- "apache"  #consulta a shodan
 
 ##
 #GeolocalizarShodan <- function() {
@@ -11,12 +11,12 @@ search_base       <-"apache"  #consulta a shodan
 ##
 
 #Realiza busque de informacion en Shodan
-ConsultarShodan <- function(query=search_base, facets=NULL, page=1, minify=TRUE){
+ConsultarShodan <- function(query = search_base, facets = NULL, page = 1, minify = TRUE){
 
   facets <- paste(facets, collapse = ",")
 
   #httr
-  res <- GET(shodan_base_url,path = "shodan/host/search",query = list(query = query,
+  res <- GET(shodan_base_url, path = "shodan/host/search", query = list(query = query,
                                                                       facets = facets,
                                                                       page = page,
                                                                       minify = minify,
