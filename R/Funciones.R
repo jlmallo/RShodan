@@ -33,9 +33,6 @@ DescargarFicheros <- function() {
   if(!dir.exists(dataPath))
     dir.create(dataPath, showWarnings = TRUE, recursive = FALSE, mode = "0777")
 
-  #xmlUrl1 <- "https://static.nvd.nist.gov/feeds/xml/cpe/dictionary/official-cpe-dictionary_v2.3.xml"
-  #download.file(xmlUrl1, destfile = "./data/CPE_dictionary.xml", method = "wget")
-
   xmlUrl2 <- "https://static.nvd.nist.gov/feeds/xml/cve/nvdcve-2.0-Modified.xml.zip"
   download.file(xmlUrl2, destfile = file.path(dataPath,"/nvdcve-2.0-modified.zip"), method = "wget")
 
