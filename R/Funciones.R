@@ -25,7 +25,6 @@ library(splitstackshape)
 
 # Variables
 
-dataPath <- file.path(getwd(),"data")
 
 #' Descarga los ficheros necesarios para poder cruzar los datos con Shodan
 #' La función (\emph{DescargarFicheros}) verifica si la carpeta destino existe

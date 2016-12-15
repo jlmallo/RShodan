@@ -1,5 +1,5 @@
 ParseNVD <- function() {
-  doc <- XML::xmlTreeParse("./data/nvdcve-2.0-modified.xml")
+  doc <- XML::xmlTreeParse(file.path(dataPath,"nvdcve-2.0-modified.xml"))
   cve <- XML::xmlRoot(doc)
 
   for (i in 1:length(cve)) {

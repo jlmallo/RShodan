@@ -1,3 +1,4 @@
+dataPath  <-  paste(getwd(),"data")
 
 DescargarFicheros()
 
