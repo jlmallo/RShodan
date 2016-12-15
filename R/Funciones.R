@@ -20,6 +20,8 @@ library("data.tree")
 library("magrittr")
 library("dplyr")
 library("plyr")
+library(splitstackshape)
+
 
 # Variables
 

@@ -52,5 +52,10 @@ ParserShodan <- function(){
   #elimina duplicados por la columna del IP
   uniques <- reposdf[!duplicated(reposdf[,1]),]
 
+  #Pone un CPE por linea, ya que existen registros de cpe de wordpress en los apache
+  uniques <- cSplit(uniques, "CPE.product", sep = ",", direction = "long")
+
+
+
   return(uniques)
 }
