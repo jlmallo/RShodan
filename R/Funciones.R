@@ -9,6 +9,7 @@ library("devtools")
 #devtools::install_github("hrbrmstr/ipapi")
 #devtools::install_github("gluc/data.tree", method = "curl", force=T)
 
+
 #library("shodan")
 library("XML")
 library("leaflet")
@@ -19,6 +20,7 @@ library("httr")
 library("data.tree")
 library("magrittr")
 library("dplyr")
+library(tidyr)
 library("plyr")
 library(splitstackshape)
 
@@ -75,8 +77,8 @@ ContarTotalCVE_CPE <- function(joinedDF){
 #' @example
 #' ContarTotalCVEs(<data_frame_devuelto_por_el_fichero_(\emph{nvdcve-2.0-modified.xml})>)
 
-ContarTotalCVEs <- function(nvdDF){
-  nvdDF <- nvdDF[!duplicated(nvdDF[,2]),]
+ContarTotalCVEs <- function(){
+  nvdDF <- joinedDF[!duplicated(joinedDF[,2]),]
   total <- dplyr::summarise(nvdDF,total_de_vulnerabilidades_unicas = n())
   return(total)
 }
@@ -87,7 +89,37 @@ ContarTotalCVEs <- function(nvdDF){
 #' ContarTotalCPE_CVE(<data_frame_devuelto_por_la_función_(\emph{UnirDatos})>)
 
 #Contar la cantidad de CPEs por CVE
-ContarTotalCPE_CVE <- function(joinedDF){
+ContarTotalCPE_CVE <- function(){
   total <- count(joinedDF, "CVE")
   return(total)
 }
+
+#Crear grafico de score de total de CPEs por CVSS del CVE
+GraficarTotalCPEByCVEScore <- function()
+{
+  barplot(table(cveDF$cvss), col = "wheat", main = "Total de CPEs por CVSS del CVE")
+}
+
+#Grafico muestra tendencias de vulnerabilidades de CPEs de Shodan agrupadas por CVSS
+GraficarTotalCPEShodanByCVEScore <- function()
+{
+  nvdDF <- joinedDF[!duplicated(joinedDF[,2]),]
+  barplot(table(nvdDF$cvss), col = "wheat", main = "Total de CPEs encontrados por Shodan agrupados por CVSS")
+
+}
+
+#Muestra total de CVEs por CVSS del archivo de NVD
+GraficarTotalCVEScore <- function()
+{
+  nvdDF <- cveDF[!duplicated(cveDF[,2]),]
+  barplot(table(nvdDF$cvss), col = "wheat", main = "Total de CVEs por CVSS")
+}
+
+
+
+
+
+
+
+
+
