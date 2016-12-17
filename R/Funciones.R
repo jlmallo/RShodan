@@ -36,7 +36,6 @@ library("splitstackshape")
 #' @return Carpeta con los ficheros necesarios
 #' @example
 #' DescargarFichero()
-
 DescargarFicheros <- function() {
 
   if (!dir.exists(dataPath))
@@ -55,7 +54,6 @@ DescargarFicheros <- function() {
 #' @return Devuelve un dataframe con los datos unidos mediante una inner_join
 #' @example
 #' UnirDatos()
-
 UnirDatos <- function()
 {
   joinedDF <- dplyr::inner_join(shodanDF, cveDF, by = "CPE.product")
@@ -67,7 +65,6 @@ UnirDatos <- function()
 #' @return Valor total de CVE per host
 #' @example
 #' ContarTotalCVE_CPE(<data_frame_devuelto_por_la_función_(\emph{UnirDatos})>)
-
 ContarTotalCVE_CPE <- function(joinedDF){
   total <- count(joinedDF, "CPE.product")
   return(total)
@@ -121,8 +118,8 @@ GraficaTotalCVEsAno <- function()
 {
   splittedDF <- tidyr::separate(data = data.frame(CVE=unique(cveDF$CVE)), col = CVE, sep = "-", into = c("xx","Year","zz"))
   barplot(table(splittedDF$Year), col = heat.colors(12), main = "Total CVEs por año")
-} 
-  
+}
+
 
 
 

@@ -1,6 +1,10 @@
 
 #Realiza busque de informacion en Shodan
-ConsultarShodan <- function(query = search_base, facets = NULL, page = 1, minify = TRUE){
+#' La función (\emph{ConsultarShodan}) consulta a Shodan
+#' @return Datos de Shodan
+#' @example
+#' ConsultarShodan(parametros de consulta)
+ConsultarShodan <- function(query = NULL, facets = NULL, page = 1, minify = TRUE){
 
   shodan_base_url <- "https://api.shodan.io"
   shodan_api_key <- "D32FBKHYYqETSf4bIdmurM7xoZA74FnL"
