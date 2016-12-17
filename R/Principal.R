@@ -20,7 +20,5 @@ totalCVEs <- ContarTotalCVEs(cveDF)
 #Contar total de CPEs que tiene cada CVE
 totalCPEsByCVE <- ContarTotalCPE_CVE(cveDF)
 
-
-
-
-
+#Geolocalizar los apache vulnerables
+PintarMapa(joinedDF)
