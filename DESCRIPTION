@@ -6,23 +6,21 @@ Author: c(
     person("Jaime", "Cheng", role = c("aut", "cre"), email = "jchengching@gmail.com"),
     person("David", "Gonzalez", role = c("aut", "cre"), email = "dga_bcn1@hotmail.com"),
     person("Jose", "Mallo", role = c("aut", "cre"), email = "joseluismallo@gmail.com"))
-Maintainer: Jaime Cheng, David Gonzalez y Jose Luis Mallo
 Description: Se integra busquedas de Shodan con CVE's y CPE's de la base de datos del NIST.
 License: NA
 Encoding: UTF-8
 LazyData: true
 URL: https://github.com/jlmallo/RShodan
 Imports:
-    XML
-    leaflet
-    maps
-    tidyr
-    httr
-    jsonlite
-    httr
-    data.tree
-    magrittr
-    dplyr
-    plyr
-    devtools
+    XML,
+    leaflet,
+    maps,
+    tidyr,
+    httr,
+    jsonlite,
+    data.tree,
+    magrittr,
+    dplyr,
+    plyr,
+    devtools,
     roxygen2
