@@ -28,30 +28,30 @@ ParseNVD <- function() {
 
 ParserShodan <- function(){
 
-  #Invocamos consulta a shodan
+  #' Invocamos consulta a shodan
   data <- ConsultarShodan("apache")
 
-  #data.tree
+  #' Data.tree
   repos <- data.tree::as.Node(data)
 
-  #convert this to a data.frame
+  #' Paso a data.frame
   reposdf <- repos %>% ToDataFrameTable(
-                                        IP="ip_str",
+                                        IP = "ip_str",
                                         CPE.product = "cpe",
-                                        TITLE="title",
-                                        TRASNPORT="transport",
-                                        PORT="port",
-                                        ORG="org",
-                                        COUNTRY="country_name",
-                                        CITY="city",
-                                        POSTAL_CODE="postal_code",
-                                        LONGITUDE="longitude",
-                                        LATITUDE="latitude")
+                                        TITLE = "title",
+                                        TRASNPORT = "transport",
+                                        PORT = "port",
+                                        ORG = "org",
+                                        COUNTRY = "country_name",
+                                        CITY = "city",
+                                        POSTAL_CODE = "postal_code",
+                                        LONGITUDE = "longitude",
+                                        LATITUDE = "latitude")
 
-  #elimina duplicados por la columna del IP
+  #' Elimina duplicados por la columna del IP
   uniques <- reposdf[!duplicated(reposdf[,1]),]
 
-  #Pone un CPE por linea, ya que existen registros de cpe de wordpress en los apache
+  #' Pone un CPE por linea, ya que existen registros de cpe de wordpress en los apache
   uniques <- cSplit(uniques, "CPE.product", sep = ",", direction = "long")
 
 

@@ -2,23 +2,23 @@ dataPath  <-  paste0(getwd(),"/data")
 
 DescargarFicheros()
 
-# Carga de CVEs
+#' Carga de CVEs
 cveDF <- ParseNVD()
 
-# Carga de Shodan
+#' Carga de Shodan
 shodanDF <- ParserShodan()
 
-#Une los dataframes de Shodan y CVE
+#' Une los dataframes de Shodan y CVE
 joinedDF <- UnirDatos()
 
-#Cuenta la cantidad de CVEs encontradas por cada CPE de los hosts de Shodan
+#' Cuenta la cantidad de CVEs encontradas por cada CPE de los hosts de Shodan
 totalCVEsByCPE <- ContarTotalCVE_CPE(joinedDF)
 
-#Contar total de CVEs unicas
+#' Contar total de CVEs unicas
 totalCVEs <- ContarTotalCVEs(cveDF)
 
-#Contar total de CPEs que tiene cada CVE
+#' Contar total de CPEs que tiene cada CVE
 totalCPEsByCVE <- ContarTotalCPE_CVE(cveDF)
 
-#Geolocalizar los apache vulnerables
+#' Geolocalizar los apache vulnerables
 PintarMapa(joinedDF)
