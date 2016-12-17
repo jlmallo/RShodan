@@ -1,16 +1,17 @@
 # descarga e instalacion de librerias
-install.packages("XML")
-install.packages("leaflet")
-install.packages("maps")
-install.packages("tidyr")
+#install.packages("XML")
+#install.packages("leaflet")
+#install.packages("maps")
+#install.packages("tidyr")
 
-library("devtools")
+
 # Instalar devtools:
 #devtools::install_github("hrbrmstr/ipapi")
 #devtools::install_github("gluc/data.tree", method = "curl", force=T)
 
 
 #library("shodan")
+library("devtools")
 library("XML")
 library("leaflet")
 library("maps")
@@ -20,9 +21,9 @@ library("httr")
 library("data.tree")
 library("magrittr")
 library("dplyr")
-library(tidyr)
+library("tidyr")
 library("plyr")
-library(splitstackshape)
+library("splitstackshape")
 
 
 # Variables

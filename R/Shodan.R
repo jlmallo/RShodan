@@ -1,17 +1,10 @@
-#Shodan
-shodan_base_url <- "https://api.shodan.io"
-shodan_api_key <- "D32FBKHYYqETSf4bIdmurM7xoZA74FnL"
-search_base <- "apache"  #consulta a shodan
-
-##
-#GeolocalizarShodan <- function() {
-#  data <- ConsultarShodan()
-#  PintarMapa (data[[1]][['ip_str']])
-#}
-##
 
 #Realiza busque de informacion en Shodan
 ConsultarShodan <- function(query = search_base, facets = NULL, page = 1, minify = TRUE){
+
+  shodan_base_url <- "https://api.shodan.io"
+  shodan_api_key <- "D32FBKHYYqETSf4bIdmurM7xoZA74FnL"
+  search_base <- "apache"  #consulta a shodan
 
   facets <- paste(facets, collapse = ",")
 

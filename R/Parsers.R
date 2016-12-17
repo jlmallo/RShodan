@@ -9,14 +9,12 @@ ParseNVD <- function() {
     cveId <- cveItem$`cve-id`
     cvss <- cveItem$cvss[1]
     cveDescription <- cveItem$summary
-    print(cveId)
     if (lengthCPEs > 0) {
       for (j in 1:lengthCPEs) {
         cpe <- cveItem$`vulnerable-software-list`[j]
         row <- c(CPE = cpe, CVE = cveId, Descripcion = cveDescription, cvss = cvss)
         if (i == 1 &  j == 1) {
           df <- rbind(data.frame(row))
-          #colnames(df) <- c("CPE", "CVE", "Description")
         }
         else {
           df <- rbind(df, data.frame(row))
