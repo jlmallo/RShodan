@@ -23,4 +23,7 @@ Imports:
     dplyr,
     plyr,
     devtools,
-    roxygen2
+    roxygen2,
+    ipapi,
+    knitr,
+    splitstackshape

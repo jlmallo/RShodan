@@ -6,10 +6,10 @@
 
 PintarMapa <- function(joinedDF) {
 
-  #obetener localizaciones webcams:
+  #obtener localizaciones webcams:
   locations <- geolocate(joinedDF$IP)
 
-  #preparar y pintar el mapa:
+  # Preparar y pintar el mapa:
   world <- map("world", fill = TRUE, plot = FALSE)
   leaflet(data = world) %>% addTiles() %>% addCircleMarkers(locations$lon, locations$lat, color = '#003fff')
 }

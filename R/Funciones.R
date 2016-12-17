@@ -4,11 +4,9 @@
 #install.packages("maps")
 #install.packages("tidyr")
 
-
 # Instalar devtools:
 #devtools::install_github("hrbrmstr/ipapi")
 #devtools::install_github("gluc/data.tree", method = "curl", force=T)
-
 
 #library("shodan")
 library("devtools")
@@ -26,16 +24,12 @@ library("tidyr")
 library("plyr")
 library("splitstackshape")
 
-
-# Variables
-
-
 #' Descarga los ficheros necesarios para poder cruzar los datos con Shodan
 #' La función (\emph{DescargarFicheros}) verifica si la carpeta destino existe
 #' Si no existe la crea y si existe descarga el fichero y lo descomprime
 #' @return Carpeta con los ficheros necesarios
 #' @example
-#' DescargarFichero()
+#' DescargarFicheros()
 DescargarFicheros <- function() {
 
   if (!dir.exists(dataPath))
@@ -46,7 +40,6 @@ DescargarFicheros <- function() {
 
   unzip(file.path(dataPath,"/nvdcve-2.0-modified.zip"), exdir = file.path(dataPath))
 }
-
 
 #' Une los dataframes que obtenemos de Shodan y CVE's decargados del NIST
 #' La función (\emph{UnirDatos}) ejecuta una (\strong{inner_join}) de los data
@@ -74,8 +67,7 @@ ContarTotalCVE_CPE <- function(joinedDF){
 #' unicas que encontramos después de sanear los datos
 #' @return Cantidad de vulnerabilidades únicas
 #' @example
-#' ContarTotalCVEs(<data_frame_devuelto_por_el_fichero_(\emph{nvdcve-2.0-modified.xml})>)
-
+#' ContarTotalCVEs()
 ContarTotalCVEs <- function(){
   nvdDF <- joinedDF[!duplicated(joinedDF[,2]),]
   total <- dplyr::summarise(nvdDF,total_de_vulnerabilidades_unicas = n())
@@ -85,21 +77,28 @@ ContarTotalCVEs <- function(){
 #' La función (\emph{ContarTotalCPE_CVE}) nos devuelve el total de CPE's por CVE's
 #' @return Cantidad de CPE's por CVE
 #' @example
-#' ContarTotalCPE_CVE(<data_frame_devuelto_por_la_función_(\emph{UnirDatos})>)
+#' ContarTotalCPE_CVE()
 
-#Contar la cantidad de CPEs por CVE
 ContarTotalCPE_CVE <- function(){
   total <- count(joinedDF, "CVE")
   return(total)
 }
 
-#Crear grafico de score de total de CPEs por CVSS del CVE
+#' La función (\emph{GraficarTotalCVEs}) nos devuelve la gráfica creada sobre el data frame cveDF
+#' que contiene el total de CPE's por CVSS del CVE
+#' @return Gráfico de barras
+#' @example
+#' GraficarTotalCPEByCVEScore()
 GraficarTotalCPEByCVEScore <- function()
 {
   barplot(table(cveDF$cvss), col = heat.colors(12), main = "Total de CPEs por CVSS del CVE")
 }
 
-#Grafico muestra tendencias de vulnerabilidades de CPEs de Shodan agrupadas por CVSS
+#' La función (\emph{GraficarTotalCPEShodanByCVEScore}) nos devuelve la gráfica de
+#' vulnerabilidades de CPE's de Shodan agrupadas por CVSS
+#' @return Gráfico de barras
+#' @example
+#' GraficarTotalCPEByCVEScore()
 GraficarTotalCPEShodanByCVEScore <- function()
 {
   nvdDF <- joinedDF[!duplicated(joinedDF[,2]),]
@@ -107,24 +106,24 @@ GraficarTotalCPEShodanByCVEScore <- function()
 
 }
 
-#Muestra total de CVEs por CVSS del archivo de NVD
+#' La función (\emph{GraficarTotalCVEScore}) nos devuelve la gráfica de
+#' vulnerabilidades de CVE's por CVSS del NVD
+#' @return Gráfico de barras
+#' @example
+#' GraficarTotalCVEScore()
 GraficarTotalCVEScore <- function()
 {
   nvdDF <- cveDF[!duplicated(cveDF[,2]),]
   barplot(table(nvdDF$cvss), col = heat.colors(12), main = "Total de CVEs por CVSS")
 }
 
+#' La función (\emph{GraficaTotalCVEsAno}) nos devuelve la gráfica de
+#' vulnerabilidades de CVE's por por año del NVD
+#' @return Gráfico de barras
+#' @example
+#' GraficaTotalCVEsAno()
 GraficaTotalCVEsAno <- function()
 {
-  splittedDF <- tidyr::separate(data = data.frame(CVE=unique(cveDF$CVE)), col = CVE, sep = "-", into = c("xx","Year","zz"))
+  splittedDF <- tidyr::separate(data = data.frame(CVE = unique(cveDF$CVE)), col = CVE, sep = "-", into = c("xx","Year","zz"))
   barplot(table(splittedDF$Year), col = heat.colors(12), main = "Total CVEs por año")
 }
-
-
-
-
-
-
-
-
-
