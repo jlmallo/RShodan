@@ -12,6 +12,7 @@
 
 #library("shodan")
 library("devtools")
+library("ipapi")
 library("XML")
 library("leaflet")
 library("maps")
