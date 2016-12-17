@@ -26,4 +26,5 @@ Imports:
     roxygen2,
     ipapi,
     knitr,
-    splitstackshape
+    splitstackshape,
+    ipapi
