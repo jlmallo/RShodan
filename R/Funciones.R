@@ -1,14 +1,8 @@
-# descarga e instalacion de librerias
-#install.packages("XML")
-#install.packages("leaflet")
-#install.packages("maps")
-#install.packages("tidyr")
-
 # Instalar devtools:
-#devtools::install_github("hrbrmstr/ipapi")
-#devtools::install_github("gluc/data.tree", method = "curl", force=T)
+devtools::install_github("hrbrmstr/ipapi")
+devtools::install_github("gluc/data.tree", method = "curl", force = T)
 
-#library("shodan")
+library("knitr")
 library("devtools")
 library("ipapi")
 library("XML")

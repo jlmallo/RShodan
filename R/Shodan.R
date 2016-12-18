@@ -1,4 +1,3 @@
-
 #Realiza busque de informacion en Shodan
 #' La función (\emph{ConsultarShodan}) consulta a Shodan
 #' @return Datos de Shodan
