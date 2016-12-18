@@ -62,7 +62,7 @@ ContarTotalCVE_CPE <- function(joinedDF){
 #' @return Cantidad de vulnerabilidades únicas
 #' @example
 #' ContarTotalCVEs()
-ContarTotalCVEs <- function(){
+ContarTotalCVEs <- function(cveDF){
   nvdDF <- cveDF[!duplicated(cveDF[,2]),]
   total <- dplyr::summarise(nvdDF,total_de_vulnerabilidades_unicas = n())
   return(total)
@@ -73,7 +73,7 @@ ContarTotalCVEs <- function(){
 #' @example
 #' ContarTotalCPE_CVE()
 
-ContarTotalCPE_CVE <- function(){
+ContarTotalCPE_CVE <- function(joinedDF){
   total <- count(joinedDF, "CVE")
   return(total)
 }
