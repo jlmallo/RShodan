@@ -8,7 +8,7 @@ PintarMapa <- function(joinedDF) {
 
 
   print(joinedDF$IP)
-  if(length(joined)>0){
+  if(length(joinedDF)>0){
     #' Obtener localizaciones webcams:
     locations <- geolocate(joinedDF$IP)
 
