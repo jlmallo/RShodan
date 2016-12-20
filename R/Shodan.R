@@ -3,11 +3,14 @@
 #' @return Datos de Shodan
 #' @example
 #' ConsultarShodan(parametros de consulta)
-ConsultarShodan <- function(query = NULL, facets = NULL, page = 1, minify = TRUE){
+ConsultarShodan <- function(query){
 
+  facets = NULL
+  page = 1
+  minify = TRUE
   shodan_base_url <- "https://api.shodan.io"
   shodan_api_key <- "D32FBKHYYqETSf4bIdmurM7xoZA74FnL"
-  query <- "apache"  #consulta a shodan
+  #query <- "apache"  #consulta a shodan
 
   facets <- paste(facets, collapse = ",")
 

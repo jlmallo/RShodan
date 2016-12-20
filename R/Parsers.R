@@ -29,7 +29,7 @@ ParseNVD <- function() {
 ParserShodan <- function(){
 
   #' Invocamos consulta a shodan
-  data <- ConsultarShodan()
+  data <- ConsultarShodan("apache")
 
   #' Data.tree
   repos <- data.tree::as.Node(data)
