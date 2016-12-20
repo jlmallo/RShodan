@@ -1,3 +1,27 @@
+ParserNVD2 <- function(){
+  xml <- xmlParse("./data/nvdcve-2.0-Modified.xml")
+
+  cves <- xpathApply(xml, "/*/*[@id]", xmlAttrs)
+
+  df <- data.frame(x= character(50), y= character(50))
+
+  for (i in 1:length(cves)) {
+      cpes <- xpathApply(xml, paste("/*/*[@id='", cves[[i]],"']//vuln:product", sep = ""), xmlValue)
+      print(cves[[i]])
+      if (length(cpes) > 0) {
+          for (j in 1:length(cpes)) {
+            row <- c(CPE = cpes[[j]], CVE = cves[[i]])
+            df <- rbind(df,  data.frame(x = cves[[i]], y =  cpes[[j]]))
+          }
+
+      }
+  }
+
+
+  return(df)
+}
+
+
 ParseNVD <- function() {
   dataPath  <-  paste0(getwd(),"/data")
   doc <- XML::xmlTreeParse(file.path(dataPath,"nvdcve-2.0-modified.xml"))
