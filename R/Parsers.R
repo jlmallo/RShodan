@@ -10,7 +10,6 @@ ParserNVD2 <- function(){
       print(cves[[i]])
       if (length(cpes) > 0) {
           for (j in 1:length(cpes)) {
-            row <- c(CPE = cpes[[j]], CVE = cves[[i]])
             df <- rbind(df,  data.frame(x = cves[[i]], y =  cpes[[j]]))
           }
 
