@@ -3,32 +3,42 @@ title: "Integración de Shodan y CPE-CVE del NIST"
 output: html_document
 ---
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+El objetivo de esta práctica es realizar una consulta de máquinas *apache* en Shodan que nos permita obtener, cruzando la información con *Nist*, las potenciales vulnerabilidades que tendrían las plataformas consultadas a través del buscador Shodan.  
+Para ello, lo que se hace es; por un lado realizar la consulta sobre Shodan, lo que permite obtener entre otras cosas los datos de CPEs y las IPs de las máquinas *apache*. Esta información se procesa y se almacena en un data frame. Por otro lado, se parse el fichero xml del *Nist* para dejarlo en un data frame y con un formato que facilita posteriormente el join entre ambos data frames, lo que permite obtener información de las potenciales vulnerabilidades que tendrían los *apaches* que devuelve Shodan.  
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 library("RShodan")
 suppressWarnings(library(dplyr, warn.conflicts = FALSE))
-# DescargarFicheros()
+#DescargarFicheros()
 cveDF <- ParseNVD()
 shodanDF <- ParserShodan()
 joinedDF <- UnirDatos(shodanDF, cveDF)
+
 ```
 
-You can also embed plots, for example:
+A continuación se muestra el total de vulnerabilidades por cada uno de los CPEs encontrados por Shodan:
+
+```{r, echo=FALSE}
+GraficarTotalCPEShodanByCVEScore(joinedDF)
+```
+
+La siguiente gráfica nos muestra el total de CPEs por **cvss**:
 
 ```{r, echo=FALSE}
 GraficarTotalCPEByCVEScore()
+```
 
-GraficarTotalCPEShodanByCVEScore(joinedDF)
-
-
+Las siguientes gráficas nos muestran el total de CVEs por **cvss** y el total de CVEs por año:
+```{r, echo=FALSE}
 GraficarTotalCVEScore(cveDF)
-
-
 
 GraficaTotalCVEsAno()
 ```
+
+Por último y aprovechando que la consulta de Shodan permite obtener las direcciones ips de las máquinas, se geolocalizan sobre el mapa del mundo:
+```{r, echo=FALSE}
+#PintarMapa(joinedDF)
+```
+
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
