@@ -9,7 +9,7 @@
 #shodanDF <- ParserShodan()
 
 #' Une los dataframes de Shodan y CVE
-#joinedDF <- UnirDatos()
+#joinedDF <- UnirDatos(shodanDF, cveDF)
 
 #' Cuenta la cantidad de CVEs encontradas por cada CPE de los hosts de Shodan
 #totalCVEsByCPE <- ContarTotalCVE_CPE(joinedDF)
