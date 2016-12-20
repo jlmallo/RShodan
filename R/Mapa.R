@@ -8,13 +8,13 @@ PintarMapa <- function(joinedDF) {
 
 
   print(joinedDF$IP)
-  if(length(joinedDF)>0){
+  if (length(joinedDF) > 0) {
     #' Obtener localizaciones webcams:
-    locations <- geolocate(joinedDF$IP)
+    locations <- ipapi::geolocate(joinedDF$IP)
 
     #' Preparar y pintar el mapa:
-    world <- map("world", fill = TRUE, plot = FALSE)
-    leaflet(data = world) %>% addTiles() %>% addCircleMarkers(locations$lon, locations$lat, color = '#003fff')
+    world <- maps::map("world", fill = TRUE, plot = FALSE)
+    leaftlet::leaflet(data = world) %>% leaftlet::addTiles() %>% leaftlet::addCircleMarkers(locations$lon, locations$lat, color = '#003fff')
 
   }
 }

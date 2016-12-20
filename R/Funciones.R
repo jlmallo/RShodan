@@ -1,5 +1,6 @@
 # Instalar devtools:
 # devtools::install_github("hrbrmstr/ipapi")
+library("devtools")
 devtools::install_github("gluc/data.tree", method = "wget", force = T)
 
 use_package("knitr")
@@ -25,7 +26,7 @@ use_package("splitstackshape")
 #' @example
 #' DescargarFicheros()
 DescargarFicheros <- function() {
-
+  dataPath  <-  paste0(getwd(),"/data")
   if (!dir.exists(dataPath))
     dir.create(dataPath, showWarnings = TRUE, recursive = FALSE, mode = "0777")
 
@@ -41,8 +42,7 @@ DescargarFicheros <- function() {
 #' @return Devuelve un dataframe con los datos unidos mediante una inner_join
 #' @example
 #' UnirDatos()
-UnirDatos <- function()
-{
+UnirDatos <- function(shodanDF, cveDF) {
   joinedDF <- dplyr::inner_join(shodanDF, cveDF, by = "CPE.product")
   return(joinedDF)
 }
@@ -53,7 +53,7 @@ UnirDatos <- function()
 #' @example
 #' ContarTotalCVE_CPE(<data_frame_devuelto_por_la_función_(\emph{UnirDatos})>)
 ContarTotalCVE_CPE <- function(joinedDF){
-  total <- count(joinedDF, "CPE.product")
+  total <- tidyr::count(joinedDF, "CPE.product")
   return(total)
 }
 
@@ -74,7 +74,7 @@ ContarTotalCVEs <- function(cveDF){
 #' ContarTotalCPE_CVE()
 
 ContarTotalCPE_CVE <- function(joinedDF){
-  total <- count(joinedDF, "CVE")
+  total <- tidyr::count(joinedDF, "CVE")
   return(total)
 }
 
@@ -93,8 +93,7 @@ GraficarTotalCPEByCVEScore <- function()
 #' @return Gráfico de barras
 #' @example
 #' GraficarTotalCPEByCVEScore()
-GraficarTotalCPEShodanByCVEScore <- function()
-{
+GraficarTotalCPEShodanByCVEScore <- function(joinedDF) {
   nvdDF <- joinedDF[!duplicated(joinedDF[,2]),]
   barplot(table(nvdDF$cvss), col = heat.colors(12), main = "Total de CPEs encontrados por Shodan agrupados por CVSS")
 
@@ -105,8 +104,7 @@ GraficarTotalCPEShodanByCVEScore <- function()
 #' @return Gráfico de barras
 #' @example
 #' GraficarTotalCVEScore()
-GraficarTotalCVEScore <- function()
-{
+GraficarTotalCVEScore <- function(cveDF) {
   nvdDF <- cveDF[!duplicated(cveDF[,2]),]
   barplot(table(nvdDF$cvss), col = heat.colors(12), main = "Total de CVEs por CVSS")
 }
