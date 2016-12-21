@@ -79,7 +79,7 @@ ParserShodan <- function(){
   uniques <- reposdf[!duplicated(reposdf[,1]),]
 
   #' Pone un CPE por linea, ya que existen registros de cpe de wordpress en los apache
-  uniques <- splitstackshape::cSplit(uniques, "CPE.product", sep = ",", direction = "long")
+  uniques <- splitstackshape::cSplit(uniques, "CPE", sep = ",", direction = "long")
 
   return(uniques)
 }
