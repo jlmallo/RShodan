@@ -1,18 +1,18 @@
 ParserNVD <- function() {
   dataPath  <-  paste0(getwd(),"/data")
   xml <- XML::xmlParse(file.path(dataPath,"nvdcve-2.0-modified.xml"))
-  cves <- XML::xpathApply(xml, "/*/*[@id]", xmlAttrs)
-  df <- data.frame(CVE = character(0), CPE = character(0), CVSS=character(0), Descripcion=character(0))
+  cves <- XML::xpathApply(xml, "/*/*[@id]", XML::xmlAttrs)
+  df <- data.frame(CVE = character(0), CPE = character(0), CVSS = character(0), Descripcion = character(0))
   for (i in 1:length(cves)) {
-      cvss <-  XML::xpathApply(xml, paste("/*/*[@id='", cves[[i]],"']//cvss:score", sep = ""), xmlValue)
-      cpes <- XML::xpathApply(xml, paste("/*/*[@id='", cves[[i]],"']//vuln:product", sep = ""), xmlValue)
-      description <- XML::xpathApply(xml, paste("/*/*[@id='", cves[[i]],"']//vuln:summary", sep = ""), xmlValue)
+      cvss <-  XML::xpathApply(xml, paste("/*/*[@id='", cves[[i]],"']//cvss:score", sep = ""), XML::xmlValue)
+      cpes <- XML::xpathApply(xml, paste("/*/*[@id='", cves[[i]],"']//vuln:product", sep = ""), XML::xmlValue)
+      description <- XML::xpathApply(xml, paste("/*/*[@id='", cves[[i]],"']//vuln:summary", sep = ""), XML::xmlValue)
 
       print(cves[[i]])
       if (length(cpes) > 0) {
           for (j in 1:length(cpes)) {
 
-            data <- data.frame(CVE = cves[[i]], CPE =  cpes[[j]], CVSS=cvss[[1]], Descripcion=description[[1]])
+            data <- data.frame(CVE = cves[[i]], CPE =  cpes[[j]], CVSS = cvss[[1]], Descripcion = description[[1]])
 
             df <- plyr::rbind.fill(df, data)
 

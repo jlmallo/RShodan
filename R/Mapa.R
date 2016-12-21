@@ -10,6 +10,6 @@ PintarMapa <- function(joinedDF) {
     locations <- ipapi::geolocate(joinedDF$IP)
 
     world <- maps::map("world", fill = TRUE, plot = FALSE)
-    leaftlet::leaflet(data = world) %>% leaftlet::addTiles() %>% leaftlet::addCircleMarkers(locations$lon, locations$lat, color = '#003fff')
+    leaflet::leaflet(data = world) %>% leaflet::addTiles() %>% leaflet::addCircleMarkers(locations$lon, locations$lat, color = '#003fff')
   }
 }
