@@ -47,7 +47,7 @@ UnirDatos <- function(shodanDF, cveDF) {
 #' encontramos en cada host devuelto por Shodan
 #' ContarTotalCVE_CPE(<data_frame_devuelto_por_la_función_UnirDatos(df1, df2))
 ContarTotalCVE_CPE <- function(joinedDF) {
-  total <- tidyr::count(joinedDF, "CPE")
+  total <- count(joinedDF, "CPE")
   return(total)
 }
 
@@ -64,7 +64,7 @@ ContarTotalCVEs <- function(cveDF) {
 #' ContarTotalCPE_CVE(df)
 
 ContarTotalCPE_CVE <- function(joinedDF) {
-  total <- tidyr::count(joinedDF, "CVE")
+  total <- count(joinedDF, "CVE")
   return(total)
 }
 
