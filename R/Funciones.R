@@ -39,7 +39,7 @@ DescargarFicheros <- function() {
 #' frames creados mediante Shodan y el fichero XML
 #' UnirDatos(df1, df2)
 UnirDatos <- function(shodanDF, cveDF) {
-  joinedDF <- dplyr::inner_join(shodanDF, cveDF, by = "CPE")
+  joinedDF <- dplyr::inner_join(shodanDF, cveDF, by = "CPE.product")
   return(joinedDF)
 }
 
