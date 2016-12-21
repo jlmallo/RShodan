@@ -1,24 +1,30 @@
-ParserNVD2 <- function() {
-  xml <- XML::xmlParse("./data/nvdcve-2.0-Modified.xml")
-
+ParserNVD <- function() {
+  dataPath  <-  paste0(getwd(),"/data")
+  xml <- XML::xmlTreeParse(file.path(dataPath,"nvdcve-2.0-modified.xml"))
   cves <- XML::xpathApply(xml, "/*/*[@id]", xmlAttrs)
-
-  df <- data.frame(x = character(50), y = character(50))
-
+  df <- data.frame(CVE = character(0), CPE = character(0), CVSS=character(0), Descripcion=character(0))
   for (i in 1:length(cves)) {
+      cvss <-  XML::xpathApply(xml, paste("/*/*[@id='", cves[[i]],"']//cvss:score", sep = ""), xmlValue)
       cpes <- XML::xpathApply(xml, paste("/*/*[@id='", cves[[i]],"']//vuln:product", sep = ""), xmlValue)
-      #print(cves[[i]])
+      description <- XML::xpathApply(xml, paste("/*/*[@id='", cves[[i]],"']//vuln:summary", sep = ""), xmlValue)
+
+      print(cves[[i]])
       if (length(cpes) > 0) {
           for (j in 1:length(cpes)) {
-            df <- rbind(df,  data.frame(x = cves[[i]], y =  cpes[[j]]))
+
+            data <- data.frame(CVE = cves[[i]], CPE =  cpes[[j]], CVSS=cvss[[1]], Descripcion=description[[1]])
+
+            df <- plyr::rbind.fill(df, data)
+
           }
+
       }
   }
 
   return(df)
 }
 
-ParseNVD <- function() {
+ParseNVD2 <- function() {
   dataPath  <-  paste0(getwd(),"/data")
   doc <- XML::xmlTreeParse(file.path(dataPath,"nvdcve-2.0-modified.xml"))
   cve <- XML::xmlRoot(doc)
@@ -58,7 +64,7 @@ ParserShodan <- function(){
   #' Paso a data.frame
   reposdf <- repos %>% data.tree::ToDataFrameTable(
                                         IP = "ip_str",
-                                        CPE.product = "cpe",
+                                        CPE = "cpe",
                                         TITLE = "title",
                                         TRASNPORT = "transport",
                                         PORT = "port",
