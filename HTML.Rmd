@@ -62,7 +62,7 @@ ContarTotalCVEs(df)
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 library("RShodan")
 suppressWarnings(library(dplyr, warn.conflicts = FALSE))
-cveDF <- ParseNVD2()
+cveDF <- ParserNVD()
 shodanDF <- ParserShodan()
 joinedDF <- UnirDatos(shodanDF, cveDF)
 ```
