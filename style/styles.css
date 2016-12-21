@@ -1,3 +1,13 @@
 h2 {
    background-color: #91bbe0;
+   text-align: left;
+}
+
+h4 {
+  background-color: #b1b6bf;
+  text-align: left;
+}
+
+p {
+  font-size: medium;
 }

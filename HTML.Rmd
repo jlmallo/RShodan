@@ -24,32 +24,53 @@ La función *ConsultarShodan* realiza una consulta a [Shodan](https://www.shodan
 ConsultarShodan(query)
 ```
 
+><h4 strong>```ParserShodan()```</strong></h4>
+><p align = "justify">
+La función *ParserShodan* realiza un parseo de los datos descargados de la consulta a [Shodan](https://www.shodan.io/). Se crea un data frame y luego se eliminan los duplicados devueltos por la consulta. <br> Ejemplo de uso:</p>
+```
+ParserShodan()
+```
+
 ><h4 strong>```ParserNVD()```</strong></h4>
 ><p align = "justify">
-La función *ParserNVD* realiza un parseo del documento del *NIST*. Mediante consultas *XPATH* obtenemos los valores necesarios (CVE-CPE) para conseguir el dataframe. <br> Ejemplo de uso:</p>
+La función *ParserNVD* realiza un parseo del documento del *NIST*. Mediante consultas *XPATH* obtenemos los valores necesarios (CVE-CPE) para conseguir el data frame. <br> Ejemplo de uso:</p>
 ```
 ParserNVD()
 ```
 
-
-
-><p align = "justify">La función de consulta, conecta a Shodan mediante API. La función que se usa en el package es:</p>
+><h4 strong>```UnirDatos(df1, df2)```</strong></h4>
+><p align = "justify">
+La función *UnirDatos* une los datos de los data frames creados por *ParserShodan* y *ParserNVD*. La relación entre uno y otro es *CPE.product*. Como resultado obtenemos un tercer data frame con los datos listos para explotar.<br> Ejemplo de uso:</p>
 ```
-ConsultarShodan(query)
-``` 
+UnirDatos(df1, df2)
+```
 
-Esta información se procesa y se almacena en un data frame. Por otro lado, se parsea el fichero xml del *Nist* para dejarlo en un data frame y con un formato que facilita posteriormente el join entre ambos data frames, lo que permite obtener información de las potenciales vulnerabilidades que tendrían los *apaches* que devuelve Shodan.
-</p> 
+><h4 strong>```ContarTotalCVE_CPE(df)```</strong></h4>
+><p align = "justify">
+La función *ContarTotalCVE_CPE* realiza un conteo del data frame resultante de la función *UnirDatos*. El conteo se lleva a cabo mediente el campo *CPE.product*.<br> Ejemplo de uso:</p>
+```
+ContarTotalCVE_CPE(df)
+```
+
+ContarTotalCVEs
+><h4 strong>```ContarTotalCVEs(df)```</strong></h4>
+><p align = "justify">
+La función *ContarTotalCVEs* realiza un conteo del data frame resultante de la función *UnirDatos*. El conteo se lleva a cabo mediente el campo *CPE.product*.<br> Ejemplo de uso:</p>
+```
+ContarTotalCVEs(df)
+```
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 library("RShodan")
 suppressWarnings(library(dplyr, warn.conflicts = FALSE))
-# DescargarFicheros()
 cveDF <- ParseNVD()
 shodanDF <- ParserShodan()
 joinedDF <- UnirDatos(shodanDF, cveDF)
 
 ```
+
+
+
 
 A continuación se muestra el total de vulnerabilidades por cada uno de los CPEs encontrados por Shodan:
 
