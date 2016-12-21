@@ -71,8 +71,8 @@ ContarTotalCPE_CVE <- function(joinedDF) {
 #' La función GraficarTotalCVEs nos devuelve la gráfica creada sobre el data
 #' frame cveDF que contiene el total de CPE's por CVSS del CVE
 #' GraficarTotalCPEByCVEScore()
-GraficarTotalCPEByCVEScore <- function() {
-  barplot(table(cveDF$cvss), col = heat.colors(12), main = "Total de CPEs por CVSS del CVE")
+GraficarTotalCPEByCVEScore <- function(cveDF) {
+  barplot(table(cveDF$cvss), col = heat.colors(12), main = "Total de CPEs por CVSS del CVE", xlab = "Score")
 }
 
 #' La función GraficarTotalCPEShodanByCVEScore nos devuelve la gráfica de
@@ -94,8 +94,8 @@ GraficarTotalCVEScore <- function(cveDF) {
 
 #' La función GraficaTotalCVEsAno nos devuelve la gráfica de vulnerabilidades
 #' de CVE's por por año del NVD
-#' GraficaTotalCVEsAno()
-GraficaTotalCVEsAno <- function() {
+#' GraficaTotalCVEsAno(df)
+GraficaTotalCVEsAno <- function(cveDF) {
   splittedDF <- tidyr::separate(data = data.frame(CVE = unique(cveDF$CVE)), col = CVE, sep = "-", into = c("xx","Year","zz"))
   barplot(table(splittedDF$Year), col = heat.colors(12), main = "Total CVEs por año")
 }

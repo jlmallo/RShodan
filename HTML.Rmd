@@ -67,30 +67,27 @@ shodanDF <- ParserShodan()
 joinedDF <- UnirDatos(shodanDF, cveDF)
 ```
 
-<h2>Gráficas obtenidas mediante el estudio</h2><br>
-<h4>Agrupación de CPE's por CVSS (Score)</h4>
+<h2>Gráficas obtenidas mediante el estudio</h2>
+<h4>Agrupación de CPE's por CVSS (Score) de CVE</h4>
 
 ```{r, echo=FALSE}
 GraficarTotalCPEShodanByCVEScore(joinedDF)
 ```
 
-La siguiente gráfica nos muestra el total de CPEs por **cvss**:
+<h4>Total de CPEs por CVSS (Score)</h4>
 
 ```{r, echo=FALSE}
-GraficarTotalCPEByCVEScore()
+GraficarTotalCPEByCVEScore(cveDF)
 ```
 
-Las siguientes gráficas nos muestran el total de CVEs por **cvss** y el total de CVEs por año:
+<h4>Las siguientes gráficas nos muestran el total de CVEs por CVSS y el total de CVEs por año</h4>
 ```{r, echo=FALSE}
 GraficarTotalCVEScore(cveDF)
 
-GraficaTotalCVEsAno()
+GraficaTotalCVEsAno(cveDF)
 ```
 
-Por último y aprovechando que la consulta de Shodan permite obtener las direcciones ips de las máquinas, se geolocalizan sobre el mapa del mundo:
+<h4>Mediante las IP's y la base de datos se puede geolocalizar las IP y dibujar en plano</h4>
 ```{r, echo=FALSE}
 #PintarMapa(joinedDF)
 ```
-
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.

@@ -1,4 +1,4 @@
-ParserNVD <- function() {
+ParserNVD2 <- function() {
   xml <- XML::xmlParse("./data/nvdcve-2.0-Modified.xml")
 
   cves <- XML::xpathApply(xml, "/*/*[@id]", xmlAttrs)
@@ -18,7 +18,7 @@ ParserNVD <- function() {
   return(df)
 }
 
-ParseNVD2 <- function() {
+ParseNVD <- function() {
   dataPath  <-  paste0(getwd(),"/data")
   doc <- XML::xmlTreeParse(file.path(dataPath,"nvdcve-2.0-modified.xml"))
   cve <- XML::xmlRoot(doc)
