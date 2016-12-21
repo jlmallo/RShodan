@@ -48,7 +48,7 @@ UnirDatos <- function(shodanDF, cveDF) {
 #' ContarTotalCVE_CPE(<data_frame_devuelto_por_la_función_UnirDatos(df1, df2))
 ContarTotalCVE_CPE <- function(joinedDF) {
   total <- count(joinedDF, "CPE")
-  return(total)
+  return(as.numeric(total))
 }
 
 #' La función ContarTotalCVEs nos devuelve el total de vulnerabilidades
@@ -57,7 +57,7 @@ ContarTotalCVE_CPE <- function(joinedDF) {
 ContarTotalCVEs <- function(cveDF) {
   nvdDF <- cveDF[!duplicated(cveDF[,2]),]
   total <- dplyr::summarise(nvdDF,total_de_vulnerabilidades_unicas = n())
-  return(total)
+  return(as.numeric(total))
 }
 
 #' La función ContarTotalCPE_CVE nos devuelve el total de CPE's por CVE's
@@ -65,7 +65,7 @@ ContarTotalCVEs <- function(cveDF) {
 
 ContarTotalCPE_CVE <- function(joinedDF) {
   total <- count(joinedDF, "CVE")
-  return(total)
+  return(as.numeric(total))
 }
 
 #' La función GraficarTotalCVEs nos devuelve la gráfica creada sobre el data
