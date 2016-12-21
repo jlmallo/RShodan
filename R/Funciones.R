@@ -39,7 +39,7 @@ DescargarFicheros <- function() {
 #' frames creados mediante Shodan y el fichero XML
 #' UnirDatos(df1, df2)
 UnirDatos <- function(shodanDF, cveDF) {
-  joinedDF <- dplyr::inner_join(shodanDF, cveDF, by = "CPE.product")
+  joinedDF <- dplyr::inner_join(shodanDF, cveDF, by = "CPE")
   return(joinedDF)
 }
 
@@ -47,7 +47,7 @@ UnirDatos <- function(shodanDF, cveDF) {
 #' encontramos en cada host devuelto por Shodan
 #' ContarTotalCVE_CPE(<data_frame_devuelto_por_la_función_UnirDatos(df1, df2))
 ContarTotalCVE_CPE <- function(joinedDF) {
-  total <- tidyr::count(joinedDF, "CPE.product")
+  total <- tidyr::count(joinedDF, "CPE")
   return(total)
 }
 
