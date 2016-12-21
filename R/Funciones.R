@@ -72,7 +72,7 @@ ContarTotalCPE_CVE <- function(joinedDF) {
 #' frame cveDF que contiene el total de CPE's por CVSS del CVE
 #' GraficarTotalCPEByCVEScore()
 GraficarTotalCPEByCVEScore <- function(cveDF) {
-  barplot(table(cveDF$cvss), col = heat.colors(12), main = "Total de CPEs por CVSS del CVE", xlab = "Score")
+  barplot(table(cveDF$CVSS), col = heat.colors(12), main = "Total de CPEs por CVSS del CVE", xlab = "Score")
 }
 
 #' La función GraficarTotalCPEShodanByCVEScore nos devuelve la gráfica de
@@ -80,7 +80,7 @@ GraficarTotalCPEByCVEScore <- function(cveDF) {
 #' GraficarTotalCPEByCVEScore(df)
 GraficarTotalCPEShodanByCVEScore <- function(joinedDF) {
   nvdDF <- joinedDF[!duplicated(joinedDF[,2]),]
-  barplot(table(nvdDF$cvss), col = heat.colors(12), main = "Total de CPEs encontrados por Shodan agrupados por CVSS")
+  barplot(table(nvdDF$CVSS), col = heat.colors(12), main = "Total de CPEs encontrados por Shodan agrupados por CVSS")
 
 }
 
@@ -89,7 +89,7 @@ GraficarTotalCPEShodanByCVEScore <- function(joinedDF) {
 #' GraficarTotalCVEScore(df)
 GraficarTotalCVEScore <- function(cveDF) {
   nvdDF <- cveDF[!duplicated(cveDF[,2]),]
-  barplot(table(nvdDF$cvss), col = heat.colors(12), main = "Total de CVEs por CVSS")
+  barplot(table(nvdDF$CVSS), col = heat.colors(12), main = "Total de CVEs por CVSS")
 }
 
 #' La función GraficaTotalCVEsAno nos devuelve la gráfica de vulnerabilidades
