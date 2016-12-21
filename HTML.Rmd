@@ -1,15 +1,50 @@
 ---
-title: "Integración de Shodan y CPE-CVE del NIST"
-output: html_document
+title: "Integración de Shodan y CPE-CVE"
+output: 
+  html_document:
+    css: ./style/styles.css
 ---
+<h2>Objetivo del package</h2>
+><p align = "justify">
+El objetivo de esta práctica es realizar una consulta a [Shodan](https://www.shodan.io/) sobre equipos que utilicen **Apache** como publicador web o de aplicaciones. Una vez obtenido este dato, se cruza la información con **Nist**, para obtener las potenciales vulnerabilidades que tendrían las plataformas consultadas a través del buscador.
+</p>
 
-El objetivo de esta práctica es realizar una consulta de máquinas *apache* en Shodan que nos permita obtener, cruzando la información con *Nist*, las potenciales vulnerabilidades que tendrían las plataformas consultadas a través del buscador Shodan.  
-Para ello, lo que se hace es; por un lado realizar la consulta sobre Shodan, lo que permite obtener entre otras cosas los datos de CPEs y las IPs de las máquinas *apache*. Esta información se procesa y se almacena en un data frame. Por otro lado, se parse el fichero xml del *Nist* para dejarlo en un data frame y con un formato que facilita posteriormente el join entre ambos data frames, lo que permite obtener información de las potenciales vulnerabilidades que tendrían los *apaches* que devuelve Shodan.  
+<h2>Funciones usadas en el package</h2>
+><h4 strong>```DescargarFicheros()```</strong></h4>
+><p align = "justify">
+La función *DescargarFicheros* verifica que exista la ruta donde vamos a guardar el fichero con los datos y posteriormente realiza la descarga y descompresión del mismo. <br> Ejemplo de uso:</p>
+```
+DescargarFicheros()
+```
+
+><h4 strong>```ConsultarShodan()```</strong></h4>
+><p align = "justify">
+La función *ConsultarShodan* realiza una consulta a [Shodan](https://www.shodan.io/) mediante el uso de API. La consulta llevada a cabo en esta práctica es **apache**. Tratamos de buscar los servidores apacha publicados a en internet y que no ocultan el Header Server. <br> Ejemplo de uso:</p>
+```
+ConsultarShodan(query)
+```
+
+><h4 strong>```ParserNVD()```</strong></h4>
+><p align = "justify">
+La función *ParserNVD* realiza un parseo del documento del *NIST*. Mediante consultas *XPATH* obtenemos los valores necesarios (CVE-CPE) para conseguir el dataframe. <br> Ejemplo de uso:</p>
+```
+ParserNVD()
+```
+
+
+
+><p align = "justify">La función de consulta, conecta a Shodan mediante API. La función que se usa en el package es:</p>
+```
+ConsultarShodan(query)
+``` 
+
+Esta información se procesa y se almacena en un data frame. Por otro lado, se parsea el fichero xml del *Nist* para dejarlo en un data frame y con un formato que facilita posteriormente el join entre ambos data frames, lo que permite obtener información de las potenciales vulnerabilidades que tendrían los *apaches* que devuelve Shodan.
+</p> 
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 library("RShodan")
 suppressWarnings(library(dplyr, warn.conflicts = FALSE))
-#DescargarFicheros()
+# DescargarFicheros()
 cveDF <- ParseNVD()
 shodanDF <- ParserShodan()
 joinedDF <- UnirDatos(shodanDF, cveDF)

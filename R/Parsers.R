@@ -1,27 +1,24 @@
-ParserNVD2 <- function(){
-  xml <- xmlParse("./data/nvdcve-2.0-Modified.xml")
+ParserNVD <- function() {
+  xml <- XML::xmlParse("./data/nvdcve-2.0-Modified.xml")
 
-  cves <- xpathApply(xml, "/*/*[@id]", xmlAttrs)
+  cves <- XML::xpathApply(xml, "/*/*[@id]", xmlAttrs)
 
-  df <- data.frame(x= character(50), y= character(50))
+  df <- data.frame(x = character(50), y = character(50))
 
   for (i in 1:length(cves)) {
-      cpes <- xpathApply(xml, paste("/*/*[@id='", cves[[i]],"']//vuln:product", sep = ""), xmlValue)
-      print(cves[[i]])
+      cpes <- XML::xpathApply(xml, paste("/*/*[@id='", cves[[i]],"']//vuln:product", sep = ""), xmlValue)
+      #print(cves[[i]])
       if (length(cpes) > 0) {
           for (j in 1:length(cpes)) {
             df <- rbind(df,  data.frame(x = cves[[i]], y =  cpes[[j]]))
           }
-
       }
   }
-
 
   return(df)
 }
 
-
-ParseNVD <- function() {
+ParseNVD2 <- function() {
   dataPath  <-  paste0(getwd(),"/data")
   doc <- XML::xmlTreeParse(file.path(dataPath,"nvdcve-2.0-modified.xml"))
   cve <- XML::xmlRoot(doc)
@@ -77,7 +74,6 @@ ParserShodan <- function(){
 
   #' Pone un CPE por linea, ya que existen registros de cpe de wordpress en los apache
   uniques <- splitstackshape::cSplit(uniques, "CPE.product", sep = ",", direction = "long")
-
 
   return(uniques)
 }
