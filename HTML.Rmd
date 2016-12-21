@@ -52,7 +52,6 @@ La función *ContarTotalCVE_CPE* realiza un conteo del data frame resultante de 
 ContarTotalCVE_CPE(df)
 ```
 
-ContarTotalCVEs
 ><h4 strong>```ContarTotalCVEs(df)```</strong></h4>
 ><p align = "justify">
 La función *ContarTotalCVEs* realiza un conteo del data frame resultante de la función *UnirDatos*. El conteo se lleva a cabo mediente el campo *CPE.product*.<br> Ejemplo de uso:</p>
@@ -66,13 +65,10 @@ suppressWarnings(library(dplyr, warn.conflicts = FALSE))
 cveDF <- ParseNVD()
 shodanDF <- ParserShodan()
 joinedDF <- UnirDatos(shodanDF, cveDF)
-
 ```
 
-
-
-
-A continuación se muestra el total de vulnerabilidades por cada uno de los CPEs encontrados por Shodan:
+<h2>Gráficas obtenidas mediante el estudio</h2><br>
+<h4>Agrupación de CPE's por CVSS (Score)</h4>
 
 ```{r, echo=FALSE}
 GraficarTotalCPEShodanByCVEScore(joinedDF)
