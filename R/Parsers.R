@@ -8,7 +8,7 @@ ParserNVD <- function() {
       cpes <- XML::xpathApply(xml, paste("/*/*[@id='", cves[[i]],"']//vuln:product", sep = ""), XML::xmlValue)
       description <- XML::xpathApply(xml, paste("/*/*[@id='", cves[[i]],"']//vuln:summary", sep = ""), XML::xmlValue)
 
-      print(cves[[i]])
+      #print(cves[[i]])
       if (length(cpes) > 0) {
           for (j in 1:length(cpes)) {
 
