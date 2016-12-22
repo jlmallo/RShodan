@@ -4,12 +4,20 @@
 
 PintarMapa <- function(joinedDF) {
 
-  print(joinedDF$IP)
   if (length(joinedDF) > 0) {
 
-    locations <- ipapi::geolocate(joinedDF$IP)
-
-    world <- maps::map("world", fill = TRUE, plot = FALSE)
-    leaflet::leaflet(data = world) %>% leaflet::addTiles() %>% leaflet::addCircleMarkers(locations$lon, locations$lat, color = '#003fff')
+    locations <- FreeGeoIP(joinedDF$IP)
+    require(maps)
+    world <- map("world", fill = TRUE, plot = FALSE) 
+    
+    # kick out a a widget
+    require(leaflet)
+    leaflet(data=world) %>% 
+      addTiles() %>% 
+      addCircleMarkers(locations$longitude, locations$latitude, 
+                       color = '#ff0000')
+    
+    
   }
+  
 }
