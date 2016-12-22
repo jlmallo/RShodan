@@ -18,6 +18,7 @@ Imports:
     tidyr,
     httr,
     jsonlite,
+    rjson,
     data.tree,
     magrittr,
     dplyr,
