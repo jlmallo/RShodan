@@ -26,5 +26,4 @@ Imports:
     devtools,
     roxygen2,
     knitr,
-    splitstackshape,
-    ipapi
+    splitstackshape
