@@ -88,6 +88,6 @@ GraficaTotalCVEsAno(cveDF)
 ```
 
 <h4>Mediante las IP's y la base de datos se puede geolocalizar las IP y dibujar en plano</h4>
-```{r, echo=FALSE}
-#PintarMapa(joinedDF)
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+PintarMapa(joinedDF)
 ```
