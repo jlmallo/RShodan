@@ -5,7 +5,7 @@ devtools::install_github("gluc/data.tree", method = "wget", force = T)
 
 use_package("knitr")
 use_package("devtools")
-use_package("ipapi")
+#use_package("ipapi")
 use_package("XML")
 use_package("leaflet")
 use_package("maps")
@@ -18,6 +18,7 @@ use_package("dplyr")
 use_package("tidyr")
 use_package("plyr")
 use_package("splitstackshape")
+use_package("rjson")
 
 #' Descarga los ficheros necesarios para poder cruzar los datos con Shodan
 #' La función DescargarFicheros verifica si la carpeta destino existe
@@ -99,3 +100,29 @@ GraficaTotalCVEsAno <- function(cveDF) {
   splittedDF <- tidyr::separate(data = data.frame(CVE = unique(cveDF$CVE)), col = CVE, sep = "-", into = c("xx","Year","zz"))
   barplot(table(splittedDF$Year), col = heat.colors(12), main = "Total CVEs por año")
 }
+
+#' La función FreeGeoIP nos devuelve la gráfica de la posicion en un mapa de las IP que
+#' presentan vulnerabilidades
+#' FreeGeoIP(joinedDF)
+FreeGeoIP <- function(ip, format = ifelse(length(ip)==1,'list','dataframe'))
+{
+  if (1 == length(ip))
+  {
+    # a single IP address
+    require(rjson)
+    url <- paste(c("http://freegeoip.net/json/", ip), collapse='')
+    ret <- fromJSON(readLines(url, warn=FALSE))
+    if (format == 'dataframe')
+      ret <- data.frame(t(unlist(ret)))
+    return(ret)
+  } else {
+    ret <- data.frame()
+    for (i in 1:length(ip))
+    {
+      r <- FreeGeoIP(ip[i], format="dataframe")
+      ret <- rbind(ret, r)
+    }
+    return(ret)
+  }
+}   
+
