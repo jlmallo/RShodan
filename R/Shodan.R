@@ -8,7 +8,7 @@ ConsultarShodan <- function(query){
   page = 1
   minify = TRUE
   shodan_base_url <- "https://api.shodan.io"
-  shodan_api_key <- "D32FBKHYYqETSf4bIdmurM7xoZA74FnL"
+  shodan_api_key <- "Poner la API aquí"
 
   facets <- paste(facets, collapse = ",")
 
